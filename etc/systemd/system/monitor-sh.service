@@ -1,0 +1,6 @@
+[Unit]
+Description="Monitoring the network"
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/monitor.sh

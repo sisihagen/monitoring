@@ -1,0 +1,12 @@
+america.sisi-systems.ovh
+asia.sisi-systems.ovh
+brazil.sisi-systems.ovh
+egypt.sisi-systems.ovh
+finnland.sisi-systems.ovh
+france.sisi-systems.ovh
+germany.sisi-systems.ovh
+poland.sisi-systems.ovh
+ru-mail.sisi-systems.ovh
+ru-web.sisi-systems.ovh
+south-africa.sisi-systems.ovh
+turkey.sisi-systems.ovh
