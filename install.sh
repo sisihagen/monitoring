@@ -45,12 +45,15 @@ if [[ "$install" = yes ]]; then
 
 			if [[ -d "$webdir" ]]; then
 				echo "webdir='$webdir'" >> $etc/include/variables.sh
+				echo "web='yes'" >> $etc/include/variables.sh
 			else
 				mkdir $webdir
 				echo "webdir='$webdir'" >> $etc/include/variables.sh
+				echo "web='yes'" >> $etc/include/variables.sh
 			fi
 		else
 			echo "webdir=''" >> $etc/include/variables.sh
+			echo "web='no'" >> $etc/include/variables.sh
 		fi
 
 		# should send mail

@@ -25,7 +25,7 @@ while true; do
 	        if [[ $? -ne 0 ]]; then
                 STATUS=$(grep -q "$i DOWN" $log)
                         if [[ $STATUS != "$i DOWN!" ]]; then
-                                echo "'date': ping failed, $i host is down!"
+                                echo "$(date): ping failed, $i host is down!"
 
                                 if [[ ! -z $mailadress ]]; then
                                     mailx -s $i is down $mailadress
@@ -35,7 +35,7 @@ while true; do
 	        else
                 STATUS=$(grep -q "$i UP" $log)
                         if [[ $STATUS != "$i UP!" ]]; then
-                                echo "'date': ping OK, $i host is up!"
+                                echo "$(date): ping OK, $i host is up!"
                         fi
                 echo "$i UP" >> $log
 	        fi
