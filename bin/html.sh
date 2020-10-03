@@ -13,12 +13,12 @@ eval "echo \"${template}\"" > $webdir/$output
 
 # 2. Body
 {
-echo "<ul>"
+echo "<ul class=\"row\">"
 	for i in "${myclients[@]}"; do
 		if [[ $(grep -q "$i DOWN" $log) ]]; then
-			echo "<li class=\"down\">"$i"</li>"
+			echo "<li class=\"alert alert-danger col-6 col-md-4\">"$i"</li>"
 		else
-			echo "<li class=\"up\">"$i"</li>"
+			echo "<li class=\"alert alert-success col-6 col-md-4\">"$i"</li>"
 		fi
 	done
 echo "</ul>"
@@ -29,11 +29,12 @@ echo "</ul>"
 echo "</main>"
 
 
-echo "<footer>"
-	echo "<span> Page is gernerated last: "$(LC_ALL=de_DE.utf8 date) "by" $(hostname) "</span>"
+echo "<footer class=\"navbar fixed-bottom navbar-light bg-light\">"
+	echo "<section class=\"container\">"
+		echo "<p class=\"lead\"> Page is gernerated last: "$(LC_ALL=de_DE.utf8 date) "by" $(hostname) "</p>"
+	echo "</section>"
 echo "</footer>"
 
-echo "<script src=\"/static/js/jquery-3.5.1.min.js\"></script>"
 echo "</body>"
 echo "</html>"
 }>> $webdir/$output
