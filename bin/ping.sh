@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ### create file 26.09.2020 ###
 ### Silvio Siefke <siefke@mail.ru> ###
-### Public Domain ###
+### Simple Public License (SimPL) ###
 
 source /usr/local/etc/monitor/include/variables.sh
 source /usr/local/etc/monitor/include/function.sh

@@ -14,12 +14,15 @@ if [[ "$install" = yes ]]; then
 		install -D -m 755 -o root bin/monitor.sh $bin
 		install -D -m 755 -o root bin/html.sh $bin
 
-		if [[ $(strings /sbin/init | grep -q "/lib/systemd") ]]; then
+		### user ask for using systemd
+		echo "your system using systemd yes|no"
+		read -r systeminit
+
+		if [[ "$systeminit" = yes ]]; then
 			install -D -m 644 -o root etc/systemd/system/monitor-sh.service $systemd
 			install -D -m 644 -o root etc/systemd/system/monitor-sh.timer $systemd
 		fi
 
-		rm -r ./bin ./etc/systemd
 		mkdir $etc
 
 		if [[ -d $etc ]]; then
@@ -32,7 +35,7 @@ if [[ "$install" = yes ]]; then
 		read -r hostswrite
 
 		if [[ "$hostswrite" = yes ]]; then
-			cp ./etc/monitor/hosts.txt $etc
+			cp -v ./etc/monitor/hosts.txt $etc
 		fi
 
 		# html page generation
@@ -44,16 +47,16 @@ if [[ "$install" = yes ]]; then
 			read -r webdir
 
 			if [[ -d "$webdir" ]]; then
-				echo "webdir='$webdir'" >> $etc/include/variables.sh
-				echo "web='yes'" >> $etc/include/variables.sh
+				printf "\nwebdir='$webdir'" >> $etc/include/variables.sh
+				printf "\nweb='yes'" >> $etc/include/variables.sh
 			else
 				mkdir $webdir
-				echo "webdir='$webdir'" >> $etc/include/variables.sh
-				echo "web='yes'" >> $etc/include/variables.sh
+				printf "\nwebdir='$webdir'" >> $etc/include/variables.sh
+				printf "\nweb='yes'" >> $etc/include/variables.sh
 			fi
 		else
-			echo "webdir=''" >> $etc/include/variables.sh
-			echo "web='no'" >> $etc/include/variables.sh
+			printf "\nwebdir=''" >> $etc/include/variables.sh
+			printf "\nweb='no'" >> $etc/include/variables.sh
 		fi
 
 		# should send mail
@@ -67,10 +70,11 @@ if [[ "$install" = yes ]]; then
 			if [[ -z "$mailadress" ]]; then
 				echo "We need a mailadress"
 			else
-				echo "mailadress='$mailadress'" >> $etc/include/variables.sh
+				printf "\nmailadress='$mailadress'" >> $etc/include/variables.sh
+				printf "\nmail='yes'" >> $etc/include/variables.sh
 			fi
 		else
-			echo "$mailadress=''" >> $etc/include/variables.sh
+			printf "\nmail='no'" >> $etc/include/variables.sh
 		fi
 
 		# activate it
@@ -79,29 +83,11 @@ if [[ "$install" = yes ]]; then
 
 		if [[ "$activate" = yes ]]; then
 			# systemd
-			if [[ $(strings /sbin/init | grep -q "/lib/systemd") ]]; then
+			if [[ $(command -v systemctl &> /dev/null) ]]; then
 				systemctl daemon-reload
 				systemctl enable --now monitor-sh.timer
 			fi
-		fi		
-	fi
-
-	exit 1
-fi
-
-if [[ "$1" = uninstall ]]; then
-	rm -v $bin/{monitor.sh,ping.sh,html.sh}
-	rm -v $log
-	rm -rv $etc
-	systemctl disable --now monitor-sh.timer
-	rm -v /etc/systemd/system/monitor-sh.{service,timer}
-	systemctl daemon-reload
-
-	echo "All files removed should now remove the folder where you be? yes|no"
-	read -p folder
-
-	if [[ "$folder" = yes ]]; then
-		rm -r $PWD ; cd
+		fi
 	fi
 
 	exit 1
