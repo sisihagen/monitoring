@@ -1,4 +1,4 @@
-This is a script to monitor server with ping checks. 
+This is a script to monitor server with ping checks. You can see it on the screenshot or in [action](http://status.sisi-systems.ovh/ "Monitoring").
 
 #### Installation
 Before the setup will start you need to filled up the hosts.txt file in etc folder. After this run the installation. 

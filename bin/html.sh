@@ -21,9 +21,9 @@ create_header
 	echo "<ul class=\"row\">"
 		for i in "${myclients[@]}"; do
 			if [[ $(grep -q "$i DOWN" $log) ]]; then
-				echo "<li class=\"alert alert-danger col-6 col-md-4\">"$i"</li>"
+				echo "<li class=\"alert alert-danger col-md-4 m-1\">"$i"</li>"
 			else
-				echo "<li class=\"alert alert-success col-6 col-md-4\">"$i"</li>"
+				echo "<li class=\"alert alert-success col-md-4 m-1\">"$i"</li>"
 			fi
 		done
 	echo "</ul>"

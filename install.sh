@@ -26,7 +26,6 @@ if [[ "$install" = yes ]]; then
 		mkdir $etc
 
 		if [[ -d $etc ]]; then
-			cp -rv ./etc/monitor/html $etc
 			cp -rv ./etc/monitor/include $etc
 		fi
 

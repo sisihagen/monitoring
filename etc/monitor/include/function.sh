@@ -2,6 +2,7 @@
 ### create file 26.09.2020 ###
 ### Silvio Siefke <siefke@mail.ru> ###
 ### Simple Public License (SimPL) ###
+source /usr/local/etc/monitor/include/variables.sh
 
 function create_header()
 {
@@ -27,7 +28,7 @@ function create_footer()
 		echo "</main>"
 		echo "<footer class=\"navbar fixed-bottom navbar-light bg-light\">"
 		echo "<section class=\"container\">"
-		echo "<p class=\"lead\"> Page is gernerated last: "$(LC_ALL=de_DE.utf8 date) "by" $(hostname) "</p>"
+		echo "<p><small> Page is gernerated last: "$(LC_ALL=de_DE.utf8 date) "by" $(hostname) "</small></p>"
 		echo "</section>"
 		echo "</footer>"
 		echo "</body>"

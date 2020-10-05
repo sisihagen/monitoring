@@ -19,7 +19,7 @@ fi
 ###
 ###	2. create html files
 ###
-if [[ -d "$webdir" ]]; then
+if [[ "$web" = yes ]]; then
 	source $bin/html.sh
 fi
 
