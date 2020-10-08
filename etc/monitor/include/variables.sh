@@ -14,8 +14,9 @@ log='/var/log/monitor.log'
 ### files
 ###
 clients='hosts.txt'
-header='header.html'
 output='index.html'
+up_log='tmp/monitor_up.txt'
+down_log='tmp/monitor_down.txt'
 
 
 ###

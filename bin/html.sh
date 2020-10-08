@@ -6,7 +6,6 @@
 source /usr/local/etc/monitor/include/variables.sh
 source /usr/local/etc/monitor/include/function.sh
 
-readarray -t myclients < $etc/$clients
 
 ### clean file
 if [[ -f "$webdir/$output" ]]; then
@@ -19,14 +18,21 @@ create_header
 # 2. Body
 {
 	echo "<ul class=\"row\">"
-		for i in "${myclients[@]}"; do
-			if [[ $(grep -q "$i DOWN" $log) ]]; then
-				echo "<li class=\"alert alert-danger col-md-4 m-1\">"$i"</li>"
-			else
-				echo "<li class=\"alert alert-success col-md-4 m-1\">"$i"</li>"
-			fi
-		done
+		# read out the down hosts
+		if [[ -f $etc/$down_log ]]; then
+			while read line; do
+				echo "<li class=\"alert alert-danger col-3 mr-1\">"$line"</li>"
+			done < $etc/$down_log
+		fi
+
+		# read out the hosts which being up
+		if [[ -f $etc/$up_log ]]; then
+			while read line; do
+				echo "<li class=\"alert alert-success col-3 mr-1\">"$line"</li>"
+			done < $etc/$up_log
+		fi
 	echo "</ul>"
+	echo "</section>"
 }>> $webdir/$output
 
 # 3. Footer

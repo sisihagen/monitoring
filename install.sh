@@ -23,7 +23,7 @@ if [[ "$install" = yes ]]; then
 			install -D -m 644 -o root etc/systemd/system/monitor-sh.timer $systemd
 		fi
 
-		mkdir $etc
+		mkdir -p $etc/tmp
 
 		if [[ -d $etc ]]; then
 			cp -rv ./etc/monitor/include $etc
