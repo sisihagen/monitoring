@@ -18,7 +18,7 @@ function create_header()
 		echo "</head>"
 		echo "<body>"
 		echo "<main>"
-		echo "<section class=\"container p-5\">"
+		echo "<section class=\"container-fluid p-5\">"
 	}>> $webdir/$output
 }
 
@@ -27,8 +27,8 @@ function create_footer()
 	{
 		echo "</main>"
 		echo "<footer class=\"navbar fixed-bottom navbar-light bg-light\">"
-		echo "<section class=\"container\">"
-		echo "<p><small> Page is gernerated last: "$(LC_ALL=de_DE.utf8 date) "by" $(hostname) "</small></p>"
+		echo "<section class=\"container-fluid\">"
+		echo "<p><small> Update: "$(LC_ALL=de_DE.utf8 date) "by" $(hostname) "</small></p>"
 		echo "</section>"
 		echo "</footer>"
 		echo "</body>"
