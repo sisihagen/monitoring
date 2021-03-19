@@ -10,7 +10,7 @@ source /usr/local/etc/monitor/include/function.sh
 ###	1. check ping
 ###
 if [[ -s $etc/$clients ]]; then
-	source $bin/ping.sh
+	$bin/ping.sh
 else
 	echo "You have filled up the clients file?"
 fi
@@ -20,6 +20,6 @@ fi
 ###	2. create html files
 ###
 if [[ "$web" = yes ]]; then
-	source $bin/html.sh
+	$bin/html.sh
 fi
 
