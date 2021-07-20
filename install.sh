@@ -46,16 +46,18 @@ if [[ "$install" = yes ]]; then
 			read -r webdir
 
 			if [[ -d "$webdir" ]]; then
-				printf "\nwebdir='$webdir'" >> $etc/include/variables.sh
-				printf "\nweb='yes'" >> $etc/include/variables.sh
+				echo "www='$webdir'" >> $etc/include/variables.sh
+				echo "web='yes'" >> $etc/include/variables.sh
+				cp ./monitoring.css $webdir
 			else
 				mkdir $webdir
-				printf "\nwebdir='$webdir'" >> $etc/include/variables.sh
-				printf "\nweb='yes'" >> $etc/include/variables.sh
+				echo "www='$webdir'" >> $etc/include/variables.sh
+				echo "web='yes'" >> $etc/include/variables.sh
+				cp ./monitoring.css $webdir
 			fi
 		else
-			printf "\nwebdir=''" >> $etc/include/variables.sh
-			printf "\nweb='no'" >> $etc/include/variables.sh
+			echo "www=''" >> $etc/include/variables.sh
+			echo "web='no'" >> $etc/include/variables.sh
 		fi
 
 		# should send mail
@@ -69,11 +71,11 @@ if [[ "$install" = yes ]]; then
 			if [[ -z "$mailadress" ]]; then
 				echo "We need a mailadress"
 			else
-				printf "\nmailadress='$mailadress'" >> $etc/include/variables.sh
-				printf "\nmail='yes'" >> $etc/include/variables.sh
+				echo "mailadress='$mailadress'" >> $etc/include/variables.sh
+				echo "mail='yes'" >> $etc/include/variables.sh
 			fi
 		else
-			printf "\nmail='no'" >> $etc/include/variables.sh
+			echo "mail='no'" >> $etc/include/variables.sh
 		fi
 
 		# activate it
@@ -85,6 +87,13 @@ if [[ "$install" = yes ]]; then
 			if [[ $(command -v systemctl &> /dev/null) ]]; then
 				systemctl daemon-reload
 				systemctl enable --now monitor-sh.timer
+			else
+				if [[ -d "/etc/cron.d" ]]; then
+					echo "mailto=$mailadress" >> /etc/cron.d/monitor.sh
+					echo "@hourly $bin/monitor.sh" >> /etc/cron.d/monitor.sh
+					echo "@hourly $bin/html.sh" >> /etc/cron.d/monitor.sh
+					chmod 755 /etc/cron.d/monitor.sh
+				fi
 			fi
 		fi
 	fi

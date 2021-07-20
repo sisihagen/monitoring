@@ -22,5 +22,5 @@ down_log='tmp/monitor_down.txt'
 ###
 ### folders
 ###
-tmpl='html'
 systemd='/etc/systemd/system'
+www='/var/www/status.sisi-systems.ovh/htdocs'

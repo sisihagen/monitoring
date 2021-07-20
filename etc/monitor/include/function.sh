@@ -13,12 +13,12 @@ function create_header()
 		echo "<meta charset=\"utf-8\">"
 		echo "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
 		echo "<title>Monitoring</title>"
-		echo "<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" integrity=\"sha386-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z\" crossorigin=\"anonymous\">"
+		echo "<link href=\"monitoring.css\" rel=\"stylesheet\">"
 		echo "<style>ul {list-style:none;}</style>"
 		echo "</head>"
 		echo "<body>"
 		echo "<main>"
-		echo "<section class=\"container-fluid p-5\">"
+		echo "<section>"
 	}>> $webdir/$output
 }
 
@@ -26,10 +26,8 @@ function create_footer()
 {
 	{
 		echo "</main>"
-		echo "<footer class=\"navbar fixed-bottom navbar-light bg-light\">"
-		echo "<section class=\"container-fluid\">"
+		echo "<footer>"
 		echo "<p><small> Update: "$(LC_ALL=de_DE.utf8 date) "by" $(hostname) "</small></p>"
-		echo "</section>"
 		echo "</footer>"
 		echo "</body>"
 		echo "</html>"
